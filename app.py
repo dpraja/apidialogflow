@@ -32,14 +32,15 @@ from flask import Flask
 from flask import request
 from flask import make_response
 
+
 # Flask app should start in global layout
 app = Flask(__name__)
-
+log = app.logger
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
-
+    return {"first_req":req}
     print("Request:")
     print(json.dumps(req, indent=4))
     sys.stdout.flush()
