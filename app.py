@@ -55,11 +55,21 @@ def webhook():
     res = json.loads(result.text)
     print(res,type(res))
     if res['ServiceMessage'] == 'Failure':
-            return("bad")
+         print("in if statement")
+         speech = "Sorry"  
+         print("in if statement")
     else:    
       data = res.get('confirmation_number')
       print("confirmation num from data",data)
-      return("confirmation num from data",data)
+      speech = "confirmation:"+data
+      #return("confirmation num from data",data)
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
     '''  
     return("bad")
     '''
