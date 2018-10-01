@@ -34,8 +34,8 @@ def webhook():
     data['customer_name'] = "customer"
     data['customer_arrival_date'] = res['arrival']
     data['customer_depature_date'] = res['departure']
-    data['customer_adult'] = str(res['adult'])   
-    data['customer_child'] = str(res['child'])
+    data['customer_adult'] = res['adult']   
+    data['customer_child'] = res['child']
     data['customer_room_type'] = res['roomtype']
     data['customer_mobile'] = res['mobile']
     data['cntry_code'] = res['countrycode']
