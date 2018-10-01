@@ -25,9 +25,26 @@ def hello():
 @app.route('/dialogflow-reservation', methods=['POST'])
 def webhook():
     
-    res = request.json
-    print(res)
-    '''
+    re = request.json
+    print("re",re)
+    res = re['queryResult']['parameters']
+    print("res",res)
+    data = {}
+    data['TFN'] = "+18663637049"
+    data['customer_name'] = "customer"
+    data['customer_arrival_date'] = res['arrival']
+    data['customer_depature_date'] = res['departure']
+    data['customer_adult'] = res['adult']    
+    data['customer_child'] = res['child']
+    data['customer_room_type'] = res['roomtype']
+    data['customer_mobile'] = res['mobile']
+    data['cntry_code'] = res['countrycode']
+    data['customer_no_of_rooms'] = "1"
+    data['customer_cc'] = "0987"
+    data['customer_room_rate'] = "1000"
+    data['customer_pickup_drop'] = res['pickup']
+    data['customer_expirydate'] = "0987"
+    
     appturl = 'https://ivrinfocuit.herokuapp.com/InsertCustomerRoomBooking'
     headers = {'content-type': 'application/json'}
     
@@ -45,6 +62,7 @@ def webhook():
       return("confirmation num from data",data)
     '''  
     return("bad")
+    '''
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
