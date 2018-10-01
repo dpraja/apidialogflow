@@ -63,13 +63,13 @@ def webhook():
       print("confirmation num from data",data)
       speech = "confirmation:"+data
       #return("confirmation num from data",data)
-    return {
+    return ({
         "speech": speech,
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
-    }
+    })
     '''  
     return("bad")
     '''
