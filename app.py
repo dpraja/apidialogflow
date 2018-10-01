@@ -65,6 +65,7 @@ def webhook():
       speech = "confirmation:"+data
       #return("confirmation num from data",data)
     #result = json.dumps(res, indent=4)
+    '''
     return(json.dumps({
         "speech": speech,
         "displayText": speech,
@@ -74,7 +75,7 @@ def webhook():
     },indent=4))
     '''  
     return("bad")
-    '''
+    
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
