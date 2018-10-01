@@ -44,23 +44,24 @@ def hello():
 def webhook():
     req = request.get_json(silent=True, force=True)
 
-    print("Request:")
+    print("Request1:")
     print(json.dumps(req, indent=4))
     sys.stdout.flush()
     res = processRequest(req)
+    
+    return(res)
 
-    res = json.dumps(res, indent=4)
+    #res = json.dumps(res, indent=4)
     # print(res)
-    r = make_response(res)
-    r.headers['Content-Type'] = 'application/json'
-    return r
-
+    #r = make_response(res)
+    #r.headers['Content-Type'] = 'application/json'
+   
 
 def processRequest(req):
-    print("res",req)
-    if req['result']['action'] != "bookhotels": 
-        test = req.get("action") 
-        return {"result":test}
+    print("Request1:",req)
+    #if req['result']['action'] != "bookhotels": 
+     #   test = req.get("action") 
+      #  return {"result":test}
     
     result = req.get("result")
     parameters = result.get("parameters")
@@ -101,7 +102,8 @@ def processRequest(req):
     return res
 
 def makeWebhookResult(json_data):
-
+    
+    print("Request1:")
     result = None
     res = None
     averagetime = None
@@ -117,6 +119,7 @@ def makeWebhookResult(json_data):
     
     print(json.dumps(res, indent=4))
     data = res.get('confirmation_number')
+    print("confirmation num from data",data)
     # get wait time
     '''
     averagetime = res.get('Average_Wait_Time')
