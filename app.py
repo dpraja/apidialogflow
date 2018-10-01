@@ -52,9 +52,11 @@ def webhook():
     print("JSON Data, Before requests.post")
     #print(json_data)
     
-    result = requests.post(appturl, data = res, headers=headers)
-    res = json.loads(result.text)
-    print(res,type(res))
+    result = requests.post(appturl, json = data)
+    print(result)
+    print(result.json())
+    #res = json.loads(result.text)
+    #print(res,type(res))
     if res['ServiceMessage'] == 'Failure':
          print("in if statement")
          speech = "Sorry"  
