@@ -44,6 +44,7 @@ def webhook():
       print("confirmation num from data",data)
       return("confirmation num from data",data)
     '''  
+    return("bad")
 
 if __name__ == '__main__':
     port = int(os.getenv('PORT', 5000))
