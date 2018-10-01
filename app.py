@@ -44,6 +44,7 @@ def webhook():
     data['customer_room_rate'] = "1000"
     data['customer_pickup_drop'] = res['pickup']
     data['customer_expirydate'] = "0987"
+    data['ivr_language'] = "2"
     
     appturl = 'https://ivrinfocuit.herokuapp.com/InsertCustomerRoomBooking'
     headers = {'content-type': 'application/json'}
