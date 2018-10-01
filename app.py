@@ -40,7 +40,7 @@ app = Flask(__name__)
 def hello():
     return("welcome thalaivi banupriya")
 
-@app.route('/webhook', methods=['POST'])
+@app.route('/dialogflow-reservation', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
 
