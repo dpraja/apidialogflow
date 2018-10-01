@@ -65,7 +65,7 @@ def processRequest(req):
     
     result = req.get("result")
     
-    parameters = result['queryResult']['parameters']
+    parameters = req['queryResult']['parameters']
     print("parameters",parameters,type(parameters))
     arrival = parameters.get("arrival")
     arrival = arrival.strftime("%Y-%m-%d")
