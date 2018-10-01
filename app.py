@@ -24,17 +24,9 @@ def hello():
 
 @app.route('/dialogflow-reservation', methods=['POST'])
 def webhook():
+    
     res = request.json
     print(res)
-   
-    #req = request.get_json(silent=True, force=True)
-    '''
-    print("Request1:")
-    print(json.dumps(req, indent=4))
-    sys.stdout.flush()
-    res = processRequest(req)
-    
-    return(res)
     '''
     appturl = 'https://ivrinfocuit.herokuapp.com/InsertCustomerRoomBooking'
     headers = {'content-type': 'application/json'}
@@ -44,11 +36,19 @@ def webhook():
     
     result = requests.post(appturl, data = res, headers=headers)
     res = json.loads(result.text)
-    
-    print(json.dumps(res, indent=4))
-    data = res.get('confirmation_number')
-    print("confirmation num from data",data)
-    return("fine")
-if __name__ == '__main__':
+    print(res,type(res))
+    if res['ServiceMessage'] == 'Failure':
+            return("bad")
+    else:    
+      data = res.get('confirmation_number')
+      print("confirmation num from data",data)
+      return("confirmation num from data",data)
+    '''  
 
-     app.run(host='192.168.1.11',port=5000)#, port=port, )
+if __name__ == '__main__':
+    port = int(os.getenv('PORT', 5000))
+
+    print("Starting app on port %d" % port)
+
+    app.run(debug=False, port=port, host='0.0.0.0')
+    #app.run(host='192.168.1.11',port=5000)#, port=port, )
