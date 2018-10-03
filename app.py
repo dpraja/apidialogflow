@@ -60,8 +60,8 @@ def processRequest(req):
     data['customer_name'] = "customer"
     data['customer_arrival_date'] = "1025"
     data['customer_depature_date'] = "1125"
-    data['customer_adult'] = adult   
-    data['customer_child'] = child
+    data['customer_adult'] = str(adult)   
+    data['customer_child'] = str(child)
     data['customer_room_type'] = roomtype
     data['customer_mobile'] = mobile
     data['cntry_code'] = countrycode
