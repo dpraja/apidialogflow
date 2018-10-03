@@ -82,7 +82,7 @@ def processRequest(req):
     data['customer_pickup_drop'] = pickup
     data['customer_expirydate'] = "0987"
     data['ivr_language'] = "2"
-    print(data)
+    print("dataaaaaaaaaaaa",data)
     json_data = json.dumps(data)
 
     print("Request Parsed,Success...")
