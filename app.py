@@ -53,7 +53,8 @@ def processRequest(req):
     countrycode = parameters.get("countrycode")
     mobile = parameters.get("mobile")
     pickup = parameters.get("pickup")
-
+    print("paraaa",parameters)
+    
     data = {}
     data['TFN'] = "+18663637049"
     data['customer_name'] = "customer"
