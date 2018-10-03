@@ -54,6 +54,13 @@ def processRequest(req):
     adult = parameters.get("adult")
     child = parameters.get("child")
     roomtype = parameters.get("roomtype")
+    rm = parameters.get("roomtype")
+    yeslist=['yeah','ya','yup','s','yes']
+    if rm in yeslist:
+        roomtype='y'
+    nolist=['no','nope','nah','n']
+    if rm in nolist:
+        roomtype='n'
     countrycode = parameters.get("countrycode")
     mobile = parameters.get("mobile")
     pickup = parameters.get("pickup")
