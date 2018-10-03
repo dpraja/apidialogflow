@@ -123,5 +123,5 @@ if __name__ == '__main__':
 
     print("Starting app on port %d" % port)
 
-    #app.run(debug=False, port=port, host='0.0.0.0')
-    app.run(host='192.168.1.7',port=5000)#, port=port, )
+    app.run(debug=False, port=port, host='0.0.0.0')
+    #app.run(host='192.168.1.7',port=5000)#, port=port, )
