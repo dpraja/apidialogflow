@@ -24,59 +24,98 @@ def hello():
 
 @app.route('/dialogflow-reservation', methods=['POST'])
 def webhook():
-    
-    re = request.json
-    print("re",re)
-    res = re['queryResult']['parameters']
-    print("res",res)
+    req = request.get_json(silent=True, force=True)
+
+    print("Request:")
+    print(json.dumps(req, indent=4))
+    sys.stdout.flush()
+    res = processRequest(req)
+
+    res = json.dumps(res, indent=4)
+    # print(res)
+    r = make_response(res)
+    r.headers['Content-Type'] = 'application/json'
+    return r
+
+
+def processRequest(req):
+    if req['result']['action'] != "bookhotels":    
+        return {}
+    print(req['result']['action'],type(req['result']['action']))
+    result = req.get("result")
+    parameters = result.get("parameters")
+    conf = parameters.get("conf")
+    arrival = parameters.get("arrival")
+    departure = parameters.get("departure")
+    adult = parameters.get("adult")
+    child = parameters.get("child")
+    roomtype = parameters.get("roomtype")
+    countrycode = parameters.get("countrycode")
+    mobile = parameters.get("mobile")
+    pickup = parameters.get("pickup")
+
     data = {}
     data['TFN'] = "+18663637049"
     data['customer_name'] = "customer"
-    data['customer_arrival_date'] = res['arrival']
-    data['customer_depature_date'] = res['departure']
-    data['customer_adult'] = res['adult']   
-    data['customer_child'] = res['child']
-    data['customer_room_type'] = res['roomtype']
-    data['customer_mobile'] = res['mobile']
-    data['cntry_code'] = res['countrycode']
+    data['customer_arrival_date'] = arrival
+    data['customer_depature_date'] = departure
+    data['customer_adult'] = adult   
+    data['customer_child'] = child
+    data['customer_room_type'] = roomtype
+    data['customer_mobile'] = mobile
+    data['cntry_code'] = countrycode
     data['customer_no_of_rooms'] = "1"
     data['customer_cc'] = "0987"
     data['customer_room_rate'] = "1000"
-    data['customer_pickup_drop'] = res['pickup']
+    data['customer_pickup_drop'] = pickup
     data['customer_expirydate'] = "0987"
     data['ivr_language'] = "2"
+    json_data = json.dumps(data)
+
+    print("Request Parsed,Success...")
+    print("Sending JSON Data...")
+    print(json_data)
+
+    sys.stdout.flush()
+    res = makeWebhookResult(json_data)
+    return res
+
+def makeWebhookResult(json_data):
+
+    result = None
+    res = None
+    confnum = None
     
     appturl = 'https://ivrinfocuit.herokuapp.com/InsertCustomerRoomBooking'
     headers = {'content-type': 'application/json'}
     
     print("JSON Data, Before requests.post")
-    #print(json_data)
+    print(json_data)
     
-    result = requests.post(appturl, json = data)
-    print(result)
-    print(result.json())
-    #res = json.loads(result.text)
-    #print(res,type(res))
-    if res['ServiceMessage'] == 'Failure':
+    result = requests.post(appturl, data = json_data,headers=headers)
+    res = json.loads(result.text)
+
+    print('res',json.dumps(res, indent=4))
+    
+    if res['ServiceMessage'] == 'Success':
          print("in if statement")
-         speech = "Sorry"  
+         speech = "Your Confirmation number is :"+res.get('conf_no') +"Thank you"
          print("in if statement")
-    else:    
-      data = res.get('confirmation_number')
-      print("confirmation num from data",data)
-      speech = "confirmation:"+data
-      #return("confirmation num from data",data)
-    #result = json.dumps(res, indent=4)
-    '''
-    return(json.dumps({
+    else:
+        speech = "Sorry "
+
+    print("Response:")
+    print(speech)
+    
+    return{
         "speech": speech,
         "displayText": speech,
         # "data": data,
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
-    },indent=4))
-    '''  
-    return("bad")
+    }
+      
+    
     
 
 if __name__ == '__main__':
@@ -84,5 +123,5 @@ if __name__ == '__main__':
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=False, port=port, host='0.0.0.0')
-    #app.run(host='192.168.1.11',port=5000)#, port=port, )
+    #app.run(debug=False, port=port, host='0.0.0.0')
+    app.run(host='192.168.1.7',port=5000)#, port=port, )
