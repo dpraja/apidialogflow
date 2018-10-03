@@ -46,7 +46,11 @@ def processRequest(req):
     parameters = result.get("parameters")
     conf = parameters.get("conf")
     arrival = parameters.get("arrival")
+    arrival=arrival.split("-")
+    arrival=arrival[1]+arrival[2]
     departure = parameters.get("departure")
+    departure=departure.split("-")
+    departure=departure[1]+departure[2]
     adult = parameters.get("adult")
     child = parameters.get("child")
     roomtype = parameters.get("roomtype")
@@ -58,8 +62,8 @@ def processRequest(req):
     data = {}
     data['TFN'] = "+18663637049"
     data['customer_name'] = "customer"
-    data['customer_arrival_date'] = "1025"
-    data['customer_depature_date'] = "1125"
+    data['customer_arrival_date'] = arrival
+    data['customer_depature_date'] = departure
     data['customer_adult'] = adult
     data['customer_child'] = child
     data['customer_room_type'] = roomtype
