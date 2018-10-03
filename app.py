@@ -55,7 +55,7 @@ def processRequest(req):
     child = parameters.get("child")
     roomtype = parameters.get("roomtype")
     rm = parameters.get("roomtype")
-    yeslist=['yeah','ya','yup','s','yes']
+    yeslist=['yeah','ya','yup','s','yes','y']
     if rm in yeslist:
         roomtype='y'
     nolist=['no','nope','nah','n']
