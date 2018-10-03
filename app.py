@@ -20,7 +20,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def hello():
-    return("welcome thalaivi banupriya")
+    return("welcome")
 
 @app.route('/dialogflow-reservation', methods=['POST'])
 def webhook():
@@ -59,8 +59,8 @@ def processRequest(req):
     data['customer_name'] = "customer"
     data['customer_arrival_date'] = "1025"
     data['customer_depature_date'] = "1125"
-    data['customer_adult'] = "2"   
-    data['customer_child'] = "2"
+    data['customer_adult'] = adult   
+    data['customer_child'] = child
     data['customer_room_type'] = roomtype
     data['customer_mobile'] = mobile
     data['cntry_code'] = countrycode
@@ -70,6 +70,7 @@ def processRequest(req):
     data['customer_pickup_drop'] = pickup
     data['customer_expirydate'] = "0987"
     data['ivr_language'] = "2"
+    print(data)
     json_data = json.dumps(data)
 
     print("Request Parsed,Success...")
