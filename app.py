@@ -57,10 +57,10 @@ def processRequest(req):
     data = {}
     data['TFN'] = "+18663637049"
     data['customer_name'] = "customer"
-    data['customer_arrival_date'] = arrival
-    data['customer_depature_date'] = departure
-    data['customer_adult'] = adult   
-    data['customer_child'] = child
+    data['customer_arrival_date'] = "1025"
+    data['customer_depature_date'] = "1125"
+    data['customer_adult'] = "2"   
+    data['customer_child'] = "2"
     data['customer_room_type'] = roomtype
     data['customer_mobile'] = mobile
     data['cntry_code'] = countrycode
