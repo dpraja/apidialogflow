@@ -29,8 +29,14 @@ def webhook():
     print("Request:")
     print(json.dumps(req, indent=4))
     sys.stdout.flush()
-    res = processRequest(req)
-
+    if req['result']['action'] == "bookhotels":
+        res = processRequest(req)
+    elif req['result']['action'] == "modify":
+        res = processRequestmodify(req)
+    elif req['result']['action'] == "cancel":
+        res = processRequestcancel(req)
+    else:
+        return {}
     res = json.dumps(res, indent=4)
     # print(res)
     r = make_response(res)
@@ -56,14 +62,7 @@ def processRequest(req):
     roomtype = parameters.get("roomtype")
     countrycode = parameters.get("countrycode")
     mobile = parameters.get("mobile")
-    #pickup = parameters.get("pickup")
-    pd = parameters.get("pickup")
-    yeslist=['yeah','ya','yup','s','yes','y']
-    if pd in yeslist:
-        pickup='y'
-    nolist=['no','nope','nah','n']
-    if pd in nolist:
-        pickup='n'
+    pickup = parameters.get("pickup")
     print("paraaa",parameters)
     
     data = {}
@@ -82,7 +81,7 @@ def processRequest(req):
     data['customer_pickup_drop'] = pickup
     data['customer_expirydate'] = "0987"
     data['ivr_language'] = "2"
-    print("dataaaaaaaaaaaa",data)
+    print(data)
     json_data = json.dumps(data)
 
     print("Request Parsed,Success...")
@@ -128,7 +127,126 @@ def makeWebhookResult(json_data):
         # "contextOut": [],
         "source": "apiai-weather-webhook-sample"
     }
-      
+
+#Modify
+def processRequestmodify(req):
+    if req['result']['action'] != "modify":    
+        return {}
+    print(req['result']['action'],type(req['result']['action']))
+    result = req.get("result")
+    parameters = result.get("parameters")
+    conf_no = parameters.get("conf_no")
+    arrival = parameters.get("arrival")
+    arrival=arrival.split("-")
+    arrival=arrival[1]+arrival[2]
+    departure = parameters.get("departure")
+    departure=departure.split("-")
+    departure=departure[1]+departure[2]
+    adult = parameters.get("adult")
+    child = parameters.get("child")
+    roomtype = parameters.get("roomtype")
+    countrycode = parameters.get("countrycode")
+    mobile = parameters.get("mobile")
+    pickup = parameters.get("pickup")
+    print("paraaa",parameters)
+    
+    data = {}
+    data['confirmation_number'] = conf_no
+    data['customer_name'] = "customer"
+    data['customer_arrival_date'] = arrival
+    data['customer_depature_date'] = departure
+    data['customer_adult'] = adult
+    data['customer_child'] = child
+    data['customer_room_type'] = roomtype
+    data['customer_mobile'] = mobile
+    data['customer_cc'] = "0987"
+    data['customer_room_rate'] = "1000"
+    data['customer_pickup_drop'] = pickup
+    data['customer_expirydate'] = "0987"
+    
+    print(data)
+    json_data = json.dumps(data)
+    
+#def makeWebhookResult(json_data):
+    
+    result = None
+    res = None
+    confnum = None
+    
+    appturl = 'https://ivrinfocuit.herokuapp.com/UpdateExistingBooking'
+    headers = {'content-type': 'application/json'}
+    
+    print("JSON Data, Before requests.post")
+    print(json_data)
+    
+    result = requests.post(appturl, data = json_data,headers=headers)
+    res = json.loads(result.text)
+
+    print('res',json.dumps(res, indent=4))
+    
+    if res['ServiceMessage'] == 'Success':
+         print("in if statement")
+         speech = "Great! Your booking has been modified. Your check-in starts at 14:00. You will shortly receive an SMS with all booking details. We look forward to host you soon and extend you a very warm welcome. We hope and trust your stay with us will be both enjoyable and comfortable. Have a great day. "
+         print("in if statement")
+    else:
+        speech = "Sorry Currently we are unable to process. Please try again."
+
+    print("Response:")
+    print(speech)
+    
+    return{
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
+
+#Cancel
+def processRequestcancel(req):
+    if req['result']['action'] != "cancel":    
+        return {}
+    #print(req['result']['action'],type(req['result']['action']))
+    result = req.get("result")
+    parameters = result.get("parameters")
+    conf_no = parameters.get("conf_no")
+    print("paraaa",parameters)
+    sys.stdout.flush()
+    
+    result = None
+    res = None
+    confnum = None
+    
+    appturl = "https://ivrinfocuit.herokuapp.com/CancelCurrentbooking?conf_no="+conf_no+""
+    headers = {'content-type': 'application/json'}
+    
+    
+    result = requests.get(appturl)
+    res = json.loads(result.text)
+
+    print('res',json.dumps(res, indent=4))
+    
+    if res['Return_Code'] == 'RCS':
+         print("in if statement")
+         speech = "Great! Your booking has been cancelled. Thank you. Have a great day."
+         print("in if statement")
+    if res['Return_Code'] == 'ICN':
+         print("in if statement")
+         speech = "Sorry, that was not a valid confirmation number. Please try again later."
+         print("in if statement")
+    else:
+        speech = "Sorry Currently we are unable to process. Please try again."
+
+    print("Response:")
+    print(speech)
+    
+    return{
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "apiai-weather-webhook-sample"
+    }
     
     
 
@@ -137,5 +255,5 @@ if __name__ == '__main__':
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=False, port=port, host='0.0.0.0')
-    #app.run(host='192.168.1.7',port=5000)#, port=port, )
+    #app.run(debug=False, port=port, host='0.0.0.0')
+    app.run(host='192.168.1.7',port=5000)#, port=port, )
