@@ -31,10 +31,13 @@ def webhook():
     sys.stdout.flush()
     print(req['result']['action'])
     if req['result']['action'] == "bookhotels":
+        print(req['result']['action'])
         res = processRequest(req)
     elif req['result']['action'] == "modify":
+        print(req['result']['action'])
         res = processRequestmodify(req)
     elif req['result']['action'] == "cancel":
+        print(req['result']['action'])
         res = processRequestcancel(req)
     else:
         return {}
