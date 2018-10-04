@@ -58,7 +58,7 @@ def processRequest(req):
     mobile = parameters.get("mobile")
     #pickup = parameters.get("pickup")
     pd = parameters.get("pickup")
-    yeslist=['oui','ya','yup','s','yes','y']
+    yeslist=['Oui','ya','yup','s','yes','y']
     if pd in yeslist:
         pickup='y'
     nolist=['non','no','nope','nah','n']
