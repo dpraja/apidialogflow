@@ -29,6 +29,7 @@ def webhook():
     print("Request:")
     print(json.dumps(req, indent=4))
     sys.stdout.flush()
+    print(req['result']['action'])
     if req['result']['action'] == "bookhotels":
         res = processRequest(req)
     elif req['result']['action'] == "modify":
