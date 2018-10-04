@@ -22,7 +22,7 @@ app = Flask(__name__)
 def hello():
     return("welcome")
 
-@app.route('/dialogflow-reservation-french', methods=['POST'])
+@app.route('/dialogflow-reservation', methods=['POST'])
 def webhook():
     req = request.get_json(silent=True, force=True)
 
