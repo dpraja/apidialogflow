@@ -36,7 +36,7 @@ def webhook():
     elif req['result']['action'] == "modify":
         print(req['result']['action'])
         res = processRequestmodify(req)
-    elif req['result']['action'] == "cancel":
+    elif req['result']['action'] == "cancelbook":
         print(req['result']['action'])
         res = processRequestcancel(req)
     else:
@@ -208,7 +208,7 @@ def processRequestmodify(req):
 
 #Cancel
 def processRequestcancel(req):
-    if req['result']['action'] != "cancel":    
+    if req['result']['action'] != "cancelbook":    
         return {}
     #print(req['result']['action'],type(req['result']['action']))
     result = req.get("result")
