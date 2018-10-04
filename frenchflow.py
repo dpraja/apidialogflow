@@ -113,7 +113,7 @@ def makeWebhookResult(json_data):
     if res['ServiceMessage'] == 'Success':
          print("in if statement")
          confirmation_num = str(res.get('conf_no'))
-         speech = "Great! Your booking has been confirmed and your Confirmation number is :"+confirmation_num + ". Your check-in starts at 14:00. You will shortly receive an SMS with all booking details. We look forward to host you soon and extend you a very warm welcome . We hope and trust your stay with us will be both enjoyable and comfortable. Have a great day. "
+         speech = "Génial! Votre réservation a été confirmée et votre numéro de confirmation est:"+confirmation_num + ". Votre enregistrement commence à 14h00. Vous allez bientôt recevoir un SMS avec tous les détails de la réservation. Nous sommes impatients de vous accueillir bientôt et de vous souhaiter la bienvenue. Nous espérons que votre séjour avec nous sera à la fois agréable et confortable. Passez une bonne journée. "
          print("in if statement")
     else:
         speech = "Sorry "
