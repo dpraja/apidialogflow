@@ -58,10 +58,10 @@ def processRequest(req):
     mobile = parameters.get("mobile")
     #pickup = parameters.get("pickup")
     pd = parameters.get("pickup")
-    yeslist=['yeah','ya','yup','s','yes','y']
+    yeslist=['oui','ya','yup','s','yes','y']
     if pd in yeslist:
         pickup='y'
-    nolist=['no','nope','nah','n']
+    nolist=['non','no','nope','nah','n']
     if pd in nolist:
         pickup='n'
     print("paraaa",parameters)
