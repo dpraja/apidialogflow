@@ -59,7 +59,7 @@ def arrival_date(arr_date):
     arr = parser.parse(arr_date).date().strftime('%d-%m-%Y')
     today_date = datetime.datetime.utcnow().date()
     print(today_date)
-    if arr_date >= today_date:
+    if arr >= today_date:
        return(arr)
     else:
         return {
@@ -75,8 +75,8 @@ def departure_date(departure_date):
     print(today_date)
     restrict_days =  today_date + datetime.timedelta(days=90)
     print(restrict_days)
-    if  dep_date >= arr_date :
-        if dep_date <= restrict_days:
+    if  dept >= arr_date :
+        if dept <= restrict_days:
             return "Please enter number of adults."
         else:
             return {
