@@ -58,7 +58,7 @@ def arrival_date(arr_date):
     print("arrival_date",arr_date)
     arr_date = datetime.datetime.strptime(arr_date, '%d-%m-%Y').date()
     #arr = parser.parse(arr_date).date().strftime('%d-%m-%Y')
-    today_date = datetime.datetime.utcnow().date()
+    today_date = datetime.datetime.utcnow().date().strftime('%d-%m-%Y')
     print(today_date)
     if arr_date >= today_date:
        return(arr_date)
