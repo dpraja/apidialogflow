@@ -56,6 +56,7 @@ def webhookeng():
 def processRequesteng(req):
     if req['result']['action'] != "bookhotels":    
         return {}
+    print("test req",req)
     print(req['result']['action'],type(req['result']['action']))
     result = req.get("result")
     parameters = result.get("parameters")
