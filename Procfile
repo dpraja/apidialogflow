@@ -1,2 +1,2 @@
 web: python app.py
-web: python frenchflow.py
+worker: python frenchflow.py
