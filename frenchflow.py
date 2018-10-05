@@ -23,7 +23,7 @@ def hello():
     return("welcome")
 
 @app.route('/dialogflow-reservation-french', methods=['POST'])
-def webhook():
+def webhook(req):
     req = request.get_json(silent=True, force=True)
 
     print("Request:")
