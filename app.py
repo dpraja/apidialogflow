@@ -52,7 +52,10 @@ def webhookeng():
     r.headers['Content-Type'] = 'application/json'
     return r
 
-
+def arrival_date(arr_date):
+    print("arrival_date",arr_date)
+    arr = parser.parse(arr_date).date().strftime('%d-%m-%Y')
+    return(arr)
 def processRequesteng(req):
     if req['result']['action'] != "bookhotels":    
         return {}
@@ -60,10 +63,10 @@ def processRequesteng(req):
     print(req['result']['action'],type(req['result']['action']))
     result = req.get("result")
     parameters = result.get("parameters")
-    conf = parameters.get("conf")
-    arrival = parameters.get("arrival")
-    arrival=arrival.split("-")
-    arrival=arrival[1]+arrival[2]
+    arrival = arrival_date(parameters.get("arrival"))
+    print(arrival,type(arrival))
+    #arrival=arrival.split("-")
+    #arrival=arrival[1]+arrival[2]
     departure = parameters.get("departure")
     departure=departure.split("-")
     departure=departure[1]+departure[2]
@@ -72,6 +75,7 @@ def processRequesteng(req):
     roomtype = parameters.get("roomtype")
     countrycode = parameters.get("countrycode")
     mobile = parameters.get("mobile")
+    
     #pickup = parameters.get("pickup")
     pd = parameters.get("pickup")
     yeslist=['yeah','ya','yup','s','yes','y']
@@ -80,6 +84,7 @@ def processRequesteng(req):
     nolist=['no','nope','nah','n']
     if pd in nolist:
         pickup='n'
+    conf = parameters.get("conf")        
     print("paraaa",parameters)
     
     data = {}
