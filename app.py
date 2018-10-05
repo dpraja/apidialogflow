@@ -15,6 +15,7 @@ import sys
 from flask import Flask
 from flask import request
 from flask import make_response
+from frenchflow import webhook
 
 app = Flask(__name__)
 
@@ -22,8 +23,12 @@ app = Flask(__name__)
 def hello():
     return("welcome")
 
+@app.route('/dialogflow-reservation-french', methods=['POST'])
+def french():
+    return webhook(req)
+
 @app.route('/dialogflow-reservation', methods=['POST'])
-def webhook():
+def webhookeng():
     req = request.get_json(silent=True, force=True)
 
     print("Request:")
@@ -32,7 +37,7 @@ def webhook():
     print(req['result']['action'])
     if req['result']['action'] == "bookhotels":
         print(req['result']['action'])
-        res = processRequest(req)
+        res = processRequesteng(req)
     elif req['result']['action'] == "modify":
         print(req['result']['action'])
         res = processRequestmodify(req)
@@ -48,7 +53,7 @@ def webhook():
     return r
 
 
-def processRequest(req):
+def processRequesteng(req):
     if req['result']['action'] != "bookhotels":    
         return {}
     print(req['result']['action'],type(req['result']['action']))
