@@ -57,7 +57,41 @@ def webhookeng():
 def arrival_date(arr_date):
     print("arrival_date",arr_date)
     arr = parser.parse(arr_date).date().strftime('%d-%m-%Y')
-    return(arr)
+    today_date = datetime.datetime.utcnow().date()
+    print(today_date)
+    if arr_date >= today_date:
+       return(arr)
+    else:
+        return {
+            "speech": "Arrival date must be scheduled atleast one day in advance.",
+            "displayText": "Arrival date must be scheduled atleast one day in advance."
+            }
+    #return(arr)
+
+def departure_date(departure_date):
+    print("arrival_date",departure_date)
+    dept = parser.parse(departure_date).date().strftime('%d-%m-%Y')
+    today_date = datetime.datetime.utcnow().date()
+    print(today_date)
+    restrict_days =  today_date + datetime.timedelta(days=90)
+    print(restrict_days)
+    if  dep_date >= arr_date :
+        if dep_date <= restrict_days:
+            return "Please enter number of adults."
+        else:
+            return {
+                "speech": "Departure date should not exceed 90 days than arrival.",
+                "displayText": "Departure date should not exceed 90 days than arrival."
+            }
+            
+    else:
+        return {
+            "speech": "Departure date should not be in past date than arrival",
+            "displayText": "Departure date should not be in past date than arrival"
+            }
+    return(dept)
+
+
 def processRequesteng(req):
     if req['result']['action'] != "bookhotels":    
         return {}
