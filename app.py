@@ -226,7 +226,7 @@ def processRequestcancel(req):
     res = None
     confnum = None
     
-    appturl = "https://ivrinfocuit.herokuapp.com/CancelCurrentbooking?conf_no="+conf_no+""
+    appturl = "https://ivrinfocuit.herokuapp.com/CancelCurrentbooking?conf_no="+str(conf_no)+""
     headers = {'content-type': 'application/json'}
     
     
