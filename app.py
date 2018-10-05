@@ -56,11 +56,12 @@ def webhookeng():
 
 def arrival_date(arr_date):
     print("arrival_date",arr_date)
-    arr = parser.parse(arr_date).date().strftime('%d-%m-%Y')
+    arr_date = datetime.datetime.strptime(arr_date, '%d-%m-%Y').date()
+    #arr = parser.parse(arr_date).date().strftime('%d-%m-%Y')
     today_date = datetime.datetime.utcnow().date()
     print(today_date)
-    if arr >= today_date:
-       return(arr)
+    if arr_date >= today_date:
+       return(arr_date)
     else:
         return {
             "speech": "Arrival date must be scheduled atleast one day in advance.",
