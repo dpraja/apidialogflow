@@ -190,7 +190,7 @@ def processRequesteng(req):
             "displayText": "Sorry, Child count should not exceed 10."
             }
         
-    if True = room_fun(parameters.get("roomtype")):
+    if True == room_fun(parameters.get("roomtype")):
         roomtype = parameters.get("roomtype")
     else:
         return {
