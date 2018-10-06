@@ -110,7 +110,7 @@ def adult_fun(adult):
 
 def child_fun(child):
     print("child inside validation fun",child)
-    if child<=10:
+    if int(child)<=10:
         return (True)
     else:
         return (False)
