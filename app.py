@@ -80,9 +80,10 @@ def arrival_date(arr_date):
 
 def departure_date(departure_date,arrival):
     print("arrival_date inside validation fun",departure_date)
-    dept = datetime.datetime.strptime(departure_date).date()
-    arrival = datetime.datetime.strptime(arrival).date()
+    dept = datetime.datetime.strptime(departure_date, '%Y-%m-%d').date()
+    arrival = datetime.datetime.strptime(arrival, '%Y-%m-%d').date()
     today_date = datetime.datetime.utcnow().date()
+    today_date = today_date.strftime("%Y-%m-%d")
     print(today_date)
     restrict_days =  today_date + datetime.timedelta(days=90)
     print(restrict_days)
