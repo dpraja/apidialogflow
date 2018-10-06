@@ -114,6 +114,13 @@ def child_fun(child):
         return (True)
     else:
         return (False)
+
+def room_fun(room):
+    return (True)
+
+def cc_fun(countrycode):
+    return (True)
+    
     
 def mob_fun(mobile):
     no = mobile 
@@ -176,27 +183,31 @@ def processRequesteng(req):
         
     if True == child_fun(parameters.get("child")):
         child = parameters.get("child")
-        return {
-            "speech": "We have STANDARD room available at the rate of $200, SUPERIOR room at the rate of $300 and DELUXE room at the rate of $400. Please type the preferred room type.",
-            "displayText": "We have STANDARD room available at the rate of $200, SUPERIOR room at the rate of $300 and DELUXE room at the rate of $400. Please type the preferred room type."
-            }
+ 
     else:
         return {
             "speech": "Sorry, Child count should not exceed 10.",
             "displayText": "Sorry, Child count should not exceed 10."
             }
         
-    roomtype = parameters.get("roomtype")
-    return {
-            "speech": "Please enter your countrycode.from code",
-            "displayText": "Please enter your countrycode.from code"
+    if True = room_fun(parameters.get("roomtype")):
+        roomtype = parameters.get("roomtype")
+    else:
+        return {
+            "speech": "Sorry, that was not a valid input",
+            "displayText": "Sorry, that was not a valid input"
             }
+        
     
-    countrycode = parameters.get("countrycode")
-    return {
+    #countrycode = parameters.get("countrycode")
+    if True = cc_fun(parameters.get("countrycode")):
+        countrycode = parameters.get("countrycode")
+    else:
+        return {
             "speech": "Please enter your mob number",
             "displayText": "Please enter your mob number"
             }
+
 
     if True== mob_fun(mobile = parameters.get("mobile")):
         mobile = parameters.get("mobile")
