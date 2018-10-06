@@ -189,7 +189,6 @@ def processRequesteng(req):
         
     if True == child_fun(parameters.get("child")):
         child = parameters.get("child")
- 
     else:
         return {
             "speech": "Sorry, Child count should not exceed 10.",
