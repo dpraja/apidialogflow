@@ -80,8 +80,8 @@ def arrival_date(arr_date):
 
 def departure_date(departure_date,arrival):
     print("arrival_date inside validation fun",departure_date)
-    dept = datetime.datetime.strptime(departure_date, '%Y-%m-%d').date()
-    arrival = datetime.datetime.strptime(arrival, '%Y-%m-%d').date()
+    dept = datetime.datetime.strptime(departure_date).date()
+    arrival = datetime.datetime.strptime(arrival).date()
     today_date = datetime.datetime.utcnow().date()
     print(today_date)
     restrict_days =  today_date + datetime.timedelta(days=90)
@@ -103,14 +103,14 @@ def departure_date(departure_date,arrival):
     
 def adult_fun(adult):
     print("adult inside validation fun",adult)
-    if adult<=10:
+    if int(adult) <= 10:
         return (True)
     else:
         return (False)
 
 def child_fun(child):
     print("child inside validation fun",child)
-    if int(child)<=10:
+    if int(child) <= 10:
         return (True)
     else:
         return (False)
