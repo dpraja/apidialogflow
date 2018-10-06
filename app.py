@@ -200,7 +200,7 @@ def processRequesteng(req):
         
     
     #countrycode = parameters.get("countrycode")
-    if True = cc_fun(parameters.get("countrycode")):
+    if True == cc_fun(parameters.get("countrycode")):
         countrycode = parameters.get("countrycode")
     else:
         return {
