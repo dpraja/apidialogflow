@@ -58,6 +58,7 @@ def arrival_date(arr_date):
     print("arrival_date",arr_date)
     arr_date = datetime.datetime.strptime(arr_date, '%Y-%m-%d').date()   #convert string to datetime format
     print(arr_date,type(arr_date))
+    today_date = datetime.datetime.utcnow().date()
     restrict_days =  today_date + datetime.timedelta(days=90)
     print(restrict_days)
     #arr_date = datetime.datetime.strptime(arr_date, '%d-%m-%Y').date()
