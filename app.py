@@ -116,10 +116,16 @@ def child_fun(child):
         return (False)
 
 def room_fun(room):
-    return (True)
+    if room:
+        return (True)
+    else:
+        return(False)
 
 def cc_fun(countrycode):
-    return (True)
+    if countrycode:
+        return (True)
+    else:
+        return (False)
     
     
 def mob_fun(mobile):
@@ -209,7 +215,7 @@ def processRequesteng(req):
             }
 
 
-    if True== mob_fun(mobile = parameters.get("mobile")):
+    if True== mob_fun(parameters.get("mobile")):
         mobile = parameters.get("mobile")
     else:
         return {
