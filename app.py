@@ -56,14 +56,10 @@ def webhookeng():
 
 def arrival_date(arr_date):
     print("arrival_date",arr_date)
-    #arr_date = datetime.datetime.strptime(arr_date, '%d-%m-%Y').date()     #datetime format
-    #dep_date = datetime.datetime.strptime(date2, '%d-%m-%Y').date()
-    #arr_date = arr_date.strftime("%Y-%m-%d")                             #formatted string datetime
-    #dep_date = dep_date.strftime("%Y-%m-%d")
     arr_date = datetime.datetime.strptime(arr_date, '%Y-%m-%d').date()   #convert string to datetime format
-    #dep_date = datetime.datetime.strptime(dep_date, '%Y-%m-%d').date()
-    #print(arr_date,dep_date)
     print(arr_date,type(arr_date))
+    restrict_days =  today_date + datetime.timedelta(days=90)
+    print(restrict_days)
     #arr_date = datetime.datetime.strptime(arr_date, '%d-%m-%Y').date()
     #arr = parser.parse(arr_date).date().strftime('%d-%m-%Y')
     today_date = datetime.datetime.utcnow().date()
@@ -179,6 +175,10 @@ def processRequesteng(req):
         
     if True == child_fun(parameters.get("child")):
         child = parameters.get("child")
+        return {
+            "speech": "We have STANDARD room available at the rate of $200, SUPERIOR room at the rate of $300 and DELUXE room at the rate of $400. Please type the preferred room type.",
+            "displayText": "We have STANDARD room available at the rate of $200, SUPERIOR room at the rate of $300 and DELUXE room at the rate of $400. Please type the preferred room type."
+            }
     else:
         return {
             "speech": "Sorry, Child count should not exceed 10.",
@@ -186,7 +186,17 @@ def processRequesteng(req):
             }
         
     roomtype = parameters.get("roomtype")
+    return {
+            "speech": "Please enter your countrycode.from code",
+            "displayText": "Please enter your countrycode.from code"
+            }
+    
     countrycode = parameters.get("countrycode")
+    return {
+            "speech": "Please enter your mob number",
+            "displayText": "Please enter your mob number"
+            }
+
     if True== mob_fun(mobile = parameters.get("mobile")):
         mobile = parameters.get("mobile")
     else:
