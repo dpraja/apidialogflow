@@ -56,41 +56,80 @@ def webhookeng():
 
 def arrival_date(arr_date):
     print("arrival_date",arr_date)
-    arr_date = datetime.datetime.strptime(arr_date, '%d-%m-%Y').date()
+    #arr_date = datetime.datetime.strptime(arr_date, '%d-%m-%Y').date()     #datetime format
+    #dep_date = datetime.datetime.strptime(date2, '%d-%m-%Y').date()
+    #arr_date = arr_date.strftime("%Y-%m-%d")                             #formatted string datetime
+    #dep_date = dep_date.strftime("%Y-%m-%d")
+    arr_date = datetime.datetime.strptime(arr_date, '%Y-%m-%d').date()   #convert string to datetime format
+    #dep_date = datetime.datetime.strptime(dep_date, '%Y-%m-%d').date()
+    #print(arr_date,dep_date)
+    print(arr_date,type(arr_date))
+    #arr_date = datetime.datetime.strptime(arr_date, '%d-%m-%Y').date()
     #arr = parser.parse(arr_date).date().strftime('%d-%m-%Y')
-    today_date = datetime.datetime.utcnow().date().strftime('%d-%m-%Y')
+    today_date = datetime.datetime.utcnow().date()
+    
     print(today_date)
     if arr_date >= today_date:
-       return(arr_date)
+       return (True)
     else:
+        return (False)
+        '''
         return {
             "speech": "Arrival date must be scheduled atleast one day in advance.",
             "displayText": "Arrival date must be scheduled atleast one day in advance."
             }
+        '''    
     #return(arr)
 
-def departure_date(departure_date):
-    print("arrival_date",departure_date)
-    dept = parser.parse(departure_date).date().strftime('%d-%m-%Y')
+def departure_date(departure_date,arrival):
+    print("arrival_date inside validation fun",departure_date)
+    dept = datetime.datetime.strptime(departure_date, '%Y-%m-%d').date()
+    arrival = datetime.datetime.strptime(arrival, '%Y-%m-%d').date()
     today_date = datetime.datetime.utcnow().date()
     print(today_date)
     restrict_days =  today_date + datetime.timedelta(days=90)
     print(restrict_days)
+    arr_date = arrival
+    print("departure********************", arr_date,dept,type(arr_date),type(dept))
     if  dept >= arr_date :
         if dept <= restrict_days:
-            return "Please enter number of adults."
+            print("its cameeeeeeeeeeeee")
+            return (True)
         else:
-            return {
-                "speech": "Departure date should not exceed 90 days than arrival.",
-                "displayText": "Departure date should not exceed 90 days than arrival."
-            }
-            
+            return (False,1)
+          
     else:
-        return {
-            "speech": "Departure date should not be in past date than arrival",
-            "displayText": "Departure date should not be in past date than arrival"
-            }
-    return(dept)
+        #print("its not cameeeeeeeeeee")
+        print("departure",dept)
+        return (False,2)
+      
+    
+def adult_fun(adult):
+    print("adult inside validation fun",adult)
+    if adult<=10:
+        return (True)
+    else:
+        return (False)
+
+def child_fun(child):
+    print("child inside validation fun",child)
+    if child<=10:
+        return (True)
+    else:
+        return (False)
+    
+def mob_fun(mobile):
+    no = mobile 
+    string = (no + '.')[:-1]
+    #print(string,type(string),string[0:1],type(string[0:1]))
+    st = string[0:1]
+    list1 = [i for i in range(len(string)) if string.startswith(st, i)]
+    #print("li:",len(list1),type(len(list1)))
+    if len(no) == 10 and 10 != len(list1):
+        print(len(no))
+        return(True)
+    else:
+        return (False)
 
 
 def processRequesteng(req):
@@ -100,28 +139,82 @@ def processRequesteng(req):
     print(req['result']['action'],type(req['result']['action']))
     result = req.get("result")
     parameters = result.get("parameters")
-    arrival = arrival_date(parameters.get("arrival"))
+    #i = 5 if a > 7 else 0
+    if True == arrival_date(parameters.get("arrival")):
+        arrival = parameters.get("arrival")
+        #arrival=arrival.split("-")
+        #arrival=arrival[1]+arrival[2]
+    else:
+        return {
+            "speech": "Arrival date must be scheduled atleast one day in advance.",
+            "displayText": "Arrival date must be scheduled atleast one day in advance."
+            }
     print(arrival,type(arrival))
-    #arrival=arrival.split("-")
-    #arrival=arrival[1]+arrival[2]
-    departure = parameters.get("departure")
-    departure=departure.split("-")
-    departure=departure[1]+departure[2]
-    adult = parameters.get("adult")
-    child = parameters.get("child")
+
+    
+    if True == departure_date(parameters.get("departure"),arrival):
+       departure = parameters.get("departure")
+       departure=departure.split("-")
+       departure=departure[1]+departure[2]
+    elif (False,1) == departure_date(parameters.get("departure"),arrival):
+        return {
+            "speech": "Departure date should not exceed 90 days than arrival.",
+            "displayText": "Departure date should not exceed 90 days than arrival."
+            }
+    else:
+        return {
+            "speech": "Departure date should not be in past date than arrival",
+            "displayText": "Departure date should not be in past date than arrival"
+            }
+        
+
+    if True == adult_fun(parameters.get("adult")):
+        adult = parameters.get("adult")
+    else:
+        return {
+            "speech": "Sorry, Adult count should not exceed 10.",
+            "displayText": "Sorry, Adult count should not exceed 10."
+            }
+        
+        
+    if True == child_fun(parameters.get("child")):
+        child = parameters.get("child")
+    else:
+        return {
+            "speech": "Sorry, Child count should not exceed 10.",
+            "displayText": "Sorry, Child count should not exceed 10."
+            }
+        
     roomtype = parameters.get("roomtype")
     countrycode = parameters.get("countrycode")
-    mobile = parameters.get("mobile")
+    if True== mob_fun(mobile = parameters.get("mobile")):
+        mobile = parameters.get("mobile")
+    else:
+        return {
+            "speech": "Sorry, the phone number is invalid.",
+            "displayText": "Sorry, the phone number is invalid."
+            }
     
     #pickup = parameters.get("pickup")
     pd = parameters.get("pickup")
     yeslist=['yeah','ya','yup','s','yes','y']
-    if pd in yeslist:
-        pickup='y'
     nolist=['no','nope','nah','n']
-    if pd in nolist:
+    if (pd in yeslist):
+        pickup='y'
+    
+    elif (pd in nolist):
         pickup='n'
-    conf = parameters.get("conf")        
+    else:
+        return {
+            "speech": "Sorry, that was not a valid input.",
+            "displayText": "Sorry, that was not a valid input."
+            }
+        
+    conf = parameters.get("conf")
+#splitting arrival date for webservice format(mmdd)
+    arrival=arrival.split("-")
+    arrival=arrival[1]+arrival[2]
+
     print("paraaa",parameters)
     
     data = {}
