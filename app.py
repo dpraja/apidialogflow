@@ -135,20 +135,6 @@ def cc_fun(countrycode):
         return (True)
     else:
         return (False)
-    
-    
-def mob_fun(mobile):
-    no = mobile 
-    string = (no + '.')[:-1]
-    #print(string,type(string),string[0:1],type(string[0:1]))
-    st = string[0:1]
-    list1 = [i for i in range(len(string)) if string.startswith(st, i)]
-    #print("li:",len(list1),type(len(list1)))
-    if len(no) == 10 and 10 != len(list1):
-        print(len(no))
-        return(True)
-    else:
-        return (False)
 
 
 def processRequesteng(req):
@@ -222,7 +208,13 @@ def processRequesteng(req):
             "displayText": "Please enter your mob number"
             }
 
-
+    def mob_fun(mobile):
+        no = mobile 
+        if len(no) == 10:
+            print(len(no))
+            return(True)
+        else:
+            return (False)
     if True== mob_fun(parameters.get("mobile")):
         mobile = parameters.get("mobile")
     else:
