@@ -83,7 +83,7 @@ def departure_date(departure_date,arrival):
     dept = datetime.datetime.strptime(departure_date, '%Y-%m-%d').date()
     arrival = datetime.datetime.strptime(arrival, '%Y-%m-%d').date()
     today_date = datetime.datetime.utcnow()
-    today_date = today_date.strptime("%Y-%m-%d").date()
+    today_date = today_date.strftime("%Y-%m-%d").date()
     today_date = datetime.datetime.strptime(today_date, '%Y-%m-%d').date()
     print(today_date)
     restrict_days =  today_date + datetime.timedelta(days=90)
