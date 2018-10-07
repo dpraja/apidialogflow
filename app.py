@@ -125,7 +125,7 @@ def child_fun(child):
         return (False)
 
 def room_fun(roomtype):
-    if room != None:
+    if roomtype != None:
         return (True)
     else:
         return(False)
