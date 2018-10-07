@@ -125,13 +125,13 @@ def child_fun(child):
         return (False)
 
 def room_fun(room):
-    if room:
+    if room != None:
         return (True)
     else:
         return(False)
 
 def cc_fun(countrycode):
-    if countrycode:
+    if countrycode != None:
         return (True)
     else:
         return (False)
