@@ -124,7 +124,7 @@ def child_fun(child):
     else:
         return (False)
 
-def room_fun(room):
+def room_fun(roomtype):
     if room != None:
         return (True)
     else:
