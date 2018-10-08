@@ -189,6 +189,8 @@ def processRequesteng(req):
             "speech": "Sorry, Child count should not exceed 10.",
             "displayText": "Sorry, Child count should not exceed 10."
             }
+     roomtype = parameters.get("roomtype")
+    '''
         
     if True == room_fun(parameters.get("roomtype")):
         roomtype = parameters.get("roomtype")
@@ -197,7 +199,7 @@ def processRequesteng(req):
             "speech": "Sorry, that was not a valid input",
             "displayText": "Sorry, that was not a valid input"
             }
-        
+     ''' 
     
     #countrycode = parameters.get("countrycode")
     if True == cc_fun(parameters.get("countrycode")):
