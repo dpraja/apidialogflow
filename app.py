@@ -197,18 +197,18 @@ def processRequesteng(req):
     #roomtype = parameters.get("roomtype")
     
         
-    if roomtype =parameters.get("roomtype")):
-        stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
-        dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
-        if (roomtype in stdlist):
-            roomtype='Standard Room'
-        elif (roomtype in dllist):
-            roomtype='Deluxe Room'
-        else:
-            return{
-            "speech": "Sorry, the room type was not valid.",
-            "displayText": "Sorry, the room type was not valid."
-            }
+    roomtype =parameters.get("roomtype")):
+    stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
+    dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
+    if (roomtype in stdlist):
+        roomtype='Standard Room'
+    elif (roomtype in dllist):
+        roomtype='Deluxe Room'
+    else:
+        return{
+        "speech": "Sorry, the room type was not valid.",
+        "displayText": "Sorry, the room type was not valid."
+        }
     '''
         roomtype = parameters.get("roomtype")
     else:
