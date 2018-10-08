@@ -209,7 +209,7 @@ def processRequesteng(req):
             "speech": "Please enter your mob number",
             "displayText": "Please enter your mob number"
             }
-     mobile = parameters.get("mobile")
+    mobile = parameters.get("mobile")
 
     '''
     def mob_fun(mobile):
