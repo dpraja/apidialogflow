@@ -123,13 +123,18 @@ def child_fun(child):
         return (True)
     else:
         return (False)
-
+'''
 def room_fun(roomtype):
-    if roomtype != None:
+    stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
+    dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
+    if (roomtype in stdlist):
+        roomtype='Standard Room'
+    elif (roomtype in dllist):
+        roomtype='Deluxe Room'
         return (True)
     else:
         return(False)
-
+'''
 def cc_fun(countrycode):
     if countrycode != None:
         return (True)
@@ -193,13 +198,25 @@ def processRequesteng(req):
     
         
     if True == room_fun(parameters.get("roomtype")):
+        stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
+        dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
+        if (roomtype in stdlist):
+            roomtype='Standard Room'
+        elif (roomtype in dllist):
+            roomtype='Deluxe Room'
+        else:
+            return{
+            "speech": "Sorry, the room type was not valid.",
+            "displayText": "Sorry, the room type was not valid."
+            }
+    '''
         roomtype = parameters.get("roomtype")
     else:
         return {
             "speech": "Sorry, that was not a valid input",
             "displayText": "Sorry, that was not a valid input"
             }
-     
+    '''
     
     #countrycode = parameters.get("countrycode")
     if True == cc_fun(parameters.get("countrycode")):
