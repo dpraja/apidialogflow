@@ -240,16 +240,8 @@ def processRequesteng(req):
     dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
     if (roomtyp in stdlist):
         roomtyp='Standard Room'
-        return {
-            "speech": "Please enter your cc code",
-            "displayText": "Please enter your cc code"
-            }
     elif (roomtyp in dllist):
         roomtyp='Deluxe Room'
-        return {
-            "speech": "Please enter your cc code",
-            "displayText": "Please enter your cc code"
-            }
     else:
         return{
         "speech": "Sorry, the room type is invalid.",
@@ -267,11 +259,6 @@ def processRequesteng(req):
     #countrycode = parameters.get("countrycode")
     if True == cc_fun(parameters.get("countrycode")):
         countrycode = parameters.get("countrycode")
-        return {
-            "speech": "Please enter your mob number",
-            "displayText": "Please enter your mob number"
-            }
-        
     else:
         return {
             "speech": "Please enter your mob number",
@@ -307,7 +294,6 @@ def processRequesteng(req):
     nolist=['no','nope','nah','n']
     if (pd in yeslist):
         pickup='y'
-    
     elif (pd in nolist):
         pickup='n'
     else:
@@ -402,7 +388,8 @@ def processRequestmodify(req):
     departure=departure[1]+departure[2]
     adult = parameters.get("adult")
     child = parameters.get("child")
-    roomtype = parameters.get("roomtype")
+    #roomtype = parameters.get("roomtype")
+    roomtype = "Standard Room"
     countrycode = parameters.get("countrycode")
     mobile = parameters.get("mobile")
     #pickup = parameters.get("pickup")
