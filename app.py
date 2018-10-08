@@ -197,7 +197,7 @@ def processRequesteng(req):
     #roomtype = parameters.get("roomtype")
     
         
-    if True == room_fun(parameters.get("roomtype")):
+    if roomtype =parameters.get("roomtype")):
         stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
         dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
         if (roomtype in stdlist):
