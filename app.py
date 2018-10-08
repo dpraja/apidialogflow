@@ -182,7 +182,7 @@ def processRequesteng(req):
             }
         
         
-    if True == child_fun(parameters.get("child")):
+    if True == child_fun(parameters["child"]):
         child = parameters.get("child")
     else:
         return {
@@ -192,8 +192,8 @@ def processRequesteng(req):
     #roomtype = parameters.get("roomtype")
     
         
-    if True == room_fun(parameters.get("roomtype")):
-        roomtype = parameters.get("roomtype")
+    if True == room_fun(parameters["roomtype"]):
+        roomtype = parameters["roomtype"]
     else:
         return {
             "speech": "Sorry, that was not a valid input",
@@ -209,6 +209,8 @@ def processRequesteng(req):
             "speech": "Please enter your mob number",
             "displayText": "Please enter your mob number"
             }
+     mobile = parameters.get("mobile")
+
     '''
     def mob_fun(mobile):
         no = mobile 
