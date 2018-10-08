@@ -136,7 +136,7 @@ def room_fun(roomtype):
         return(False)
 '''
 def cc_fun(countrycode):
-    if countrycode != None:
+    if len(countrycode) == 2:
         return (True)
     else:
         return (False)
@@ -255,8 +255,8 @@ def processRequesteng(req):
         pickup='n'
     else:
         return {
-            "speech": "Sorry, that was not a valid input.",
-            "displayText": "Sorry, that was not a valid input."
+            "speech": "Sorry, that was not a valid pickup and drop input.",
+            "displayText": "Sorry, that was not a valid pickup and drop input."
             }
         
     conf = parameters.get("conf")
