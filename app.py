@@ -135,6 +135,13 @@ def room_fun(roomtype):
     else:
         return(False)
 '''
+def mob_fun(mobile):
+    if len(mobile) == 10:
+        print(len(mobile))
+        return(True)
+    else:
+        return (False)
+        
 def cc_fun(countrycode):
     if len(countrycode) == 2:
         return (True)
@@ -189,6 +196,10 @@ def processRequesteng(req):
         
     if True == child_fun(parameters.get("child")):
         child = parameters.get("child")
+        return{
+             "speech": "We have STANDARD room available at the rate of $200  per night and SUPERIOR room available at the rate of $300 per night and DELUXE room available at the rate of  $400 per night. Please type the preferred room type.",
+            "displayText": "We have STANDARD room available at the rate of $200  per night and SUPERIOR room available at the rate of $300 per night and DELUXE room available at the rate of  $400 per night. Please type the preferred room type."
+        }
     else:
         return {
             "speech": "Sorry, Child count should not exceed 10.",
@@ -202,8 +213,16 @@ def processRequesteng(req):
     dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
     if (roomtype in stdlist):
         roomtype='Standard Room'
+        return {
+            "speech": "Please enter your cc code",
+            "displayText": "Please enter your cc code"
+            }
     elif (roomtype in dllist):
         roomtype='Deluxe Room'
+        return {
+            "speech": "Please enter your cc code",
+            "displayText": "Please enter your cc code"
+            }
     else:
         return{
         "speech": "Sorry, the room type was not valid.",
@@ -221,12 +240,28 @@ def processRequesteng(req):
     #countrycode = parameters.get("countrycode")
     if True == cc_fun(parameters.get("countrycode")):
         countrycode = parameters.get("countrycode")
+        return {
+            "speech": "Please enter your mob number",
+            "displayText": "Please enter your mob number"
+            }
+        
     else:
         return {
             "speech": "Please enter your mob number",
             "displayText": "Please enter your mob number"
             }
-    mobile = parameters.get("mobile")
+    #mobile = parameters.get("mobile")
+    if True== mob_fun(parameters.get("mobile")):
+        mobile = parameters.get("mobile")
+        return {
+            "speech": "Are you looking for pickup and drop facility?",
+            "displayText": "Are you looking for pickup and drop facility?"
+            }
+    else:
+        return {
+            "speech": "Sorry, the phone number is invalid.",
+            "displayText": "Sorry, the phone number is invalid."
+            }
 
     '''
     def mob_fun(mobile):
@@ -236,14 +271,9 @@ def processRequesteng(req):
             return(True)
         else:
             return (False)
-    if True== mob_fun(parameters.get("mobile")):
-        mobile = parameters.get("mobile")
-    else:
-        return {
-            "speech": "Sorry, the phone number is invalid.",
-            "displayText": "Sorry, the phone number is invalid."
-            }
     '''
+  
+    
     #pickup = parameters.get("pickup")
     pd = parameters.get("pickup")
     yeslist=['yeah','ya','yup','s','yes','y']
