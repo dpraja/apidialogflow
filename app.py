@@ -126,14 +126,15 @@ def departure_date(departure_date,arrival):
     
 def adult_fun(adult):
     print("adult inside validation fun",adult)
-    if float(adult) <= 10:
+    if adult <= 10:
         return (True)
     else:
         return (False)
 
 def child_fun(child):
     print("child inside validation fun",child)
-    if float(child) <= 10:
+    print("type of childddddddddddddddddddddd",typeof(child))
+    if child <= 10:
         return (True)
     else:
         return (False)
