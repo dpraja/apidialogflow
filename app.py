@@ -220,42 +220,40 @@ def processRequesteng(req):
         return {
             "speech": "Sorry, Adult count should not exceed 10.",
             "displayText": "Sorry, Adult count should not exceed 10."
-            }
-        
-        
+            }        
+    
     if True == child_fun(parameters.get("child")):
         child = parameters.get("child")
-        return{
-             "speech": "We have STANDARD room available at the rate of $200  per night and SUPERIOR room available at the rate of $300 per night and DELUXE room available at the rate of  $400 per night. Please type the preferred room type.",
-            "displayText": "We have STANDARD room available at the rate of $200  per night and SUPERIOR room available at the rate of $300 per night and DELUXE room available at the rate of  $400 per night. Please type the preferred room type."
-        }
     else:
         return {
             "speech": "Sorry, Child count should not exceed 10.",
             "displayText": "Sorry, Child count should not exceed 10."
             }
+    
+  
     #roomtype = parameters.get("roomtype")
     
         
-    roomtype =parameters.get("roomtype")
+    roomtyp =parameters.get("roomtype")
+    print("rooooooooooooooooooooooooomtype",roomtyp)
     stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
     dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
-    if (roomtype in stdlist):
-        roomtype='Standard Room'
+    if (roomtyp in stdlist):
+        roomtyp='Standard Room'
         return {
             "speech": "Please enter your cc code",
             "displayText": "Please enter your cc code"
             }
-    elif (roomtype in dllist):
-        roomtype='Deluxe Room'
+    elif (roomtyp in dllist):
+        roomtyp='Deluxe Room'
         return {
             "speech": "Please enter your cc code",
             "displayText": "Please enter your cc code"
             }
     else:
         return{
-        "speech": "Sorry, the room type was not valid.",
-        "displayText": "Sorry, the room type was not valid."
+        "speech": "Sorry, the room type is invalid.",
+        "displayText": "Sorry, the room type is invalid."
         }
     '''
         roomtype = parameters.get("roomtype")
@@ -332,7 +330,7 @@ def processRequesteng(req):
     data['customer_depature_date'] = departure
     data['customer_adult'] = adult
     data['customer_child'] = child
-    data['customer_room_type'] = roomtype
+    data['customer_room_type'] = roomtyp
     data['customer_mobile'] = mobile
     data['cntry_code'] = countrycode
     data['customer_no_of_rooms'] = "1"
