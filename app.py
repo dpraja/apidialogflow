@@ -159,6 +159,7 @@ def mob_fun(mobile):
         
 def cc_fun(countrycode):
     if len(str(countrycode)) == 2:
+        
         return (True)
     else:
         return (False)
