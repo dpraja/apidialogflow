@@ -262,8 +262,8 @@ def processRequesteng(req):
         countrycode = parameters.get("countrycode")
     else:
         return {
-            "speech": "Please enter your mob number",
-            "displayText": "Please enter your mob number"
+            "speech": "Sorry, that was invalid country code",
+            "displayText": "Sorry, that was invalid country code"
             }
     #mobile = parameters.get("mobile")
     if True== mob_fun(parameters.get("mobile")):
