@@ -189,8 +189,8 @@ def processRequesteng(req):
             "speech": "Sorry, Child count should not exceed 10.",
             "displayText": "Sorry, Child count should not exceed 10."
             }
-    roomtype = parameters.get("roomtype")
-    '''
+    #roomtype = parameters.get("roomtype")
+    
         
     if True == room_fun(parameters.get("roomtype")):
         roomtype = parameters.get("roomtype")
@@ -199,7 +199,7 @@ def processRequesteng(req):
             "speech": "Sorry, that was not a valid input",
             "displayText": "Sorry, that was not a valid input"
             }
-     ''' 
+     
     
     #countrycode = parameters.get("countrycode")
     if True == cc_fun(parameters.get("countrycode")):
@@ -209,7 +209,7 @@ def processRequesteng(req):
             "speech": "Please enter your mob number",
             "displayText": "Please enter your mob number"
             }
-
+    '''
     def mob_fun(mobile):
         no = mobile 
         if len(no) == 10:
@@ -224,7 +224,7 @@ def processRequesteng(req):
             "speech": "Sorry, the phone number is invalid.",
             "displayText": "Sorry, the phone number is invalid."
             }
-    
+    '''
     #pickup = parameters.get("pickup")
     pd = parameters.get("pickup")
     yeslist=['yeah','ya','yup','s','yes','y']
