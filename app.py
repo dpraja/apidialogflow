@@ -133,7 +133,7 @@ def adult_fun(adult):
 
 def child_fun(child):
     print("child inside validation fun",child)
-    print("type of childddddddddddddddddddddd",typeof(child))
+    print("type of childddddddddddddddddddddd",type(child))
     if child <= 10:
         return (True)
     else:
