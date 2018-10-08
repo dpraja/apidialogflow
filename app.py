@@ -66,16 +66,30 @@ def arrival_date(arr_date):
     today_date = datetime.datetime.utcnow().date()
     
     print(today_date)
+    if  arr_date >= today_date :
+        if arr_date <= restrict_days:
+            print("its cameeeeeeeeeeeee")
+            return (True)
+        else:
+            return (False,1)
+          
+    else:
+        #print("its not cameeeeeeeeeee")
+        print("departure",dept)
+        return (False,2)
+    '''
+    
     if arr_date >= today_date:
        return (True)
     else:
         return (False)
-        '''
+        
+        
         return {
             "speech": "Arrival date must be scheduled atleast one day in advance.",
             "displayText": "Arrival date must be scheduled atleast one day in advance."
             }
-        '''    
+    '''    
     #return(arr)
 
 def departure_date(departure_date,arrival):
@@ -156,7 +170,20 @@ def processRequesteng(req):
     print(req['result']['action'],type(req['result']['action']))
     result = req.get("result")
     parameters = result.get("parameters")
-    #i = 5 if a > 7 else 0
+    if True == arrival_date(parameters.get("arrival")):
+        arrival = parameters.get("arrival")    
+    elif (False,1) == arrival_date(parameters.get("arrival")):
+        return {
+            "speech": "Arrival date should not exceed 90 days.",
+            "displayText": "Arrival date should not exceed 90 days."
+            }
+    else:
+        return {
+            "speech": "Arrival date must be scheduled atleast one day in advance.",
+            "displayText": "Arrival date must be scheduled atleast one day in advance."
+            }
+    '''
+    
     if True == arrival_date(parameters.get("arrival")):
         arrival = parameters.get("arrival")
         #arrival=arrival.split("-")
@@ -166,6 +193,7 @@ def processRequesteng(req):
             "speech": "Arrival date must be scheduled atleast one day in advance.",
             "displayText": "Arrival date must be scheduled atleast one day in advance."
             }
+    '''
     print(arrival,type(arrival))
 
     
