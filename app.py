@@ -401,6 +401,7 @@ def processRequestmodify(req):
     nolist=['no','nope','nah','n']
     if pd in nolist:
         pickup='n'
+    conf=parameters.get("confirmation")
     print("paraaa",parameters)
     
     data = {}
