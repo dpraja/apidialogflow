@@ -66,48 +66,27 @@ def arrival_date(arr_date):
     today_date = datetime.datetime.utcnow().date()
     
     print(today_date)
-    if  arr_date >= today_date :
-        if arr_date <= restrict_days:
-            print("its cameeeeeeeeeeeee")
-            return (True)
-        else:
-            return (False,1)
-          
-    else:
-        #print("its not cameeeeeeeeeee")
-        print("departure",dept)
-        return (False,2)
-    '''
-    
     if arr_date >= today_date:
        return (True)
     else:
         return (False)
-        
-        
+        '''
         return {
             "speech": "Arrival date must be scheduled atleast one day in advance.",
             "displayText": "Arrival date must be scheduled atleast one day in advance."
             }
-    '''    
+        '''    
     #return(arr)
 
 def departure_date(departure_date,arrival):
     print("arrival_date inside validation fun",departure_date)
     dept = datetime.datetime.strptime(departure_date, '%Y-%m-%d').date()
     arrival = datetime.datetime.strptime(arrival, '%Y-%m-%d').date()
-    
-    today_date = datetime.datetime.utcnow().date()
-    restrict_days =  today_date + datetime.timedelta(days=90)
-    
-    today_date = datetime.datetime.utcnow().date()
-    '''
+    today_date = datetime.datetime.utcnow()
     today_date = today_date.strftime("%Y-%m-%d").date()
     today_date = datetime.datetime.strptime(today_date, '%Y-%m-%d').date()
-    '''
-    
     print(today_date)
-    #restrict_days =  today_date + datetime.timedelta(days=90)
+    restrict_days =  today_date + datetime.timedelta(days=90)
     print(restrict_days)
     arr_date = arrival
     print("departure********************", arr_date,dept,type(arr_date),type(dept))
@@ -126,41 +105,41 @@ def departure_date(departure_date,arrival):
     
 def adult_fun(adult):
     print("adult inside validation fun",adult)
-    if adult <= 10:
+    if int(adult) <= 10:
         return (True)
     else:
         return (False)
 
 def child_fun(child):
     print("child inside validation fun",child)
-    print("type of childddddddddddddddddddddd",type(child))
-    if child <= 10:
+    if int(child) <= 10:
         return (True)
     else:
         return (False)
-'''
-def room_fun(roomtype):
-    stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
-    dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
-    if (roomtype in stdlist):
-        roomtype='Standard Room'
-    elif (roomtype in dllist):
-        roomtype='Deluxe Room'
+
+def room_fun(room):
+    if room:
         return (True)
     else:
         return(False)
-'''
-def mob_fun(mobile):
-    if len(mobile) == 10:
-        print(len(mobile))
-        return(True)
+
+def cc_fun(countrycode):
+    if countrycode:
+        return (True)
     else:
         return (False)
-        
-def cc_fun(countrycode):
-    if len(str(countrycode)) == 2:
-        
-        return (True)
+    
+    
+def mob_fun(mobile):
+    no = mobile 
+    string = (no + '.')[:-1]
+    #print(string,type(string),string[0:1],type(string[0:1]))
+    st = string[0:1]
+    list1 = [i for i in range(len(string)) if string.startswith(st, i)]
+    #print("li:",len(list1),type(len(list1)))
+    if len(no) == 10 and 10 != len(list1):
+        print(len(no))
+        return(True)
     else:
         return (False)
 
@@ -172,20 +151,7 @@ def processRequesteng(req):
     print(req['result']['action'],type(req['result']['action']))
     result = req.get("result")
     parameters = result.get("parameters")
-    if True == arrival_date(parameters.get("arrival")):
-        arrival = parameters.get("arrival")    
-    elif (False,1) == arrival_date(parameters.get("arrival")):
-        return {
-            "speech": "Arrival date should not exceed 90 days.",
-            "displayText": "Arrival date should not exceed 90 days."
-            }
-    else:
-        return {
-            "speech": "Arrival date must be scheduled atleast one day in advance.",
-            "displayText": "Arrival date must be scheduled atleast one day in advance."
-            }
-    '''
-    
+    #i = 5 if a > 7 else 0
     if True == arrival_date(parameters.get("arrival")):
         arrival = parameters.get("arrival")
         #arrival=arrival.split("-")
@@ -195,7 +161,6 @@ def processRequesteng(req):
             "speech": "Arrival date must be scheduled atleast one day in advance.",
             "displayText": "Arrival date must be scheduled atleast one day in advance."
             }
-    '''
     print(arrival,type(arrival))
 
     
@@ -221,8 +186,9 @@ def processRequesteng(req):
         return {
             "speech": "Sorry, Adult count should not exceed 10.",
             "displayText": "Sorry, Adult count should not exceed 10."
-            }        
-    
+            }
+        
+        
     if True == child_fun(parameters.get("child")):
         child = parameters.get("child")
     else:
@@ -230,65 +196,33 @@ def processRequesteng(req):
             "speech": "Sorry, Child count should not exceed 10.",
             "displayText": "Sorry, Child count should not exceed 10."
             }
-    
-  
-    #roomtype = parameters.get("roomtype")
-    
-    '''    
-    roomtyp =parameters.get("roomtype")
-    print("rooooooooooooooooooooooooomtype",roomtyp)
-    stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
-    dllist=['deluxe','deluxe room','Deluxe room','deluxe Room','Deluxe Room','Deluxe','DELUXE','DELUXE ROOM']
-    if (roomtyp in stdlist):
-        roomtyp='Standard Room'
-    elif (roomtyp in dllist):
-        roomtyp='Deluxe Room'
-    else:
-        return{
-        "speech": "Sorry, the room type is invalid.",
-        "displayText": "Sorry, the room type is invalid."
-        }
-    '''
-    '''
+        
+    if True == room_fun(parameters.get("roomtype")):
         roomtype = parameters.get("roomtype")
     else:
         return {
             "speech": "Sorry, that was not a valid input",
             "displayText": "Sorry, that was not a valid input"
             }
-    '''
+        
     
     #countrycode = parameters.get("countrycode")
     if True == cc_fun(parameters.get("countrycode")):
         countrycode = parameters.get("countrycode")
     else:
         return {
-            "speech": "Sorry, that was invalid country code",
-            "displayText": "Sorry, that was invalid country code"
+            "speech": "Please enter your mob number",
+            "displayText": "Please enter your mob number"
             }
-    #mobile = parameters.get("mobile")
+
+
     if True== mob_fun(parameters.get("mobile")):
         mobile = parameters.get("mobile")
-        return {
-            "speech": "Are you looking for pickup and drop facility?",
-            "displayText": "Are you looking for pickup and drop facility?"
-            }
     else:
         return {
             "speech": "Sorry, the phone number is invalid.",
             "displayText": "Sorry, the phone number is invalid."
             }
-
-    '''
-    def mob_fun(mobile):
-        no = mobile 
-        if len(no) == 10:
-            print(len(no))
-            return(True)
-        else:
-            return (False)
-    '''
-  
     
     #pickup = parameters.get("pickup")
     pd = parameters.get("pickup")
@@ -296,12 +230,13 @@ def processRequesteng(req):
     nolist=['no','nope','nah','n']
     if (pd in yeslist):
         pickup='y'
+    
     elif (pd in nolist):
         pickup='n'
     else:
         return {
-            "speech": "Sorry, that was not a valid pickup and drop input.",
-            "displayText": "Sorry, that was not a valid pickup and drop input."
+            "speech": "Sorry, that was not a valid input.",
+            "displayText": "Sorry, that was not a valid input."
             }
         
     conf = parameters.get("conf")
@@ -318,7 +253,7 @@ def processRequesteng(req):
     data['customer_depature_date'] = departure
     data['customer_adult'] = adult
     data['customer_child'] = child
-    data['customer_room_type'] = roomtyp
+    data['customer_room_type'] = roomtype
     data['customer_mobile'] = mobile
     data['cntry_code'] = countrycode
     data['customer_no_of_rooms'] = "1"
@@ -390,8 +325,7 @@ def processRequestmodify(req):
     departure=departure[1]+departure[2]
     adult = parameters.get("adult")
     child = parameters.get("child")
-    #roomtype = parameters.get("roomtype")
-    roomtype = "Standard Room"
+    roomtype = parameters.get("roomtype")
     countrycode = parameters.get("countrycode")
     mobile = parameters.get("mobile")
     #pickup = parameters.get("pickup")
@@ -402,7 +336,7 @@ def processRequestmodify(req):
     nolist=['no','nope','nah','n']
     if pd in nolist:
         pickup='n'
-    conf=parameters.get("confirmation")
+    #conf=parameters.get("conf")
     print("paraaa",parameters)
     
     data = {}
