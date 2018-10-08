@@ -233,7 +233,7 @@ def processRequesteng(req):
   
     #roomtype = parameters.get("roomtype")
     
-        
+    '''    
     roomtyp =parameters.get("roomtype")
     print("rooooooooooooooooooooooooomtype",roomtyp)
     stdlist=['standard','standard room','standard Room','Standard Room','STANDARD ROOM','STANDARD']
@@ -247,6 +247,7 @@ def processRequesteng(req):
         "speech": "Sorry, the room type is invalid.",
         "displayText": "Sorry, the room type is invalid."
         }
+    '''
     '''
         roomtype = parameters.get("roomtype")
     else:
