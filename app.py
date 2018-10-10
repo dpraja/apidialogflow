@@ -124,13 +124,13 @@ def child_fun(child):
         return (False)
 
 def room_fun(room):
-    if room:
+    if room is not None:
         return (True)
     else:
         return(False)
 
 def cc_fun(countrycode):
-    if countrycode:
+    if countrycode is not None:
         return (True)
     else:
         return (False)
@@ -207,8 +207,8 @@ def processRequesteng(req):
         roomtype = parameters.get("roomtype")
     else:
         return {
-            "speech": "Sorry, that was not a valid input",
-            "displayText": "Sorry, that was not a valid input"
+            "speech": "Sorry, roomtype that was not a valid input",
+            "displayText": "Sorry, roomtype that was not a valid input"
             }
         
     
@@ -217,8 +217,8 @@ def processRequesteng(req):
         countrycode = parameters.get("countrycode")
     else:
         return {
-            "speech": "Please enter your mob number",
-            "displayText": "Please enter your mob number"
+            "speech": " sorry this is not a valid input country code",
+            "displayText": "sorry this is not a valid input country code"
             }
 
 
@@ -450,5 +450,5 @@ if __name__ == '__main__':
 
     print("Starting app on port %d" % port)
 
-    app.run(debug=False, port=port, host='0.0.0.0')
-    #app.run(host='192.168.1.7',port=5000)#, port=port, )
+    #app.run(debug=False, port=port, host='0.0.0.0')
+    app.run(host='192.168.1.7',port=5000)#, port=port, )
